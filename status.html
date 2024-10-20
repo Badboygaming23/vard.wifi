@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title id="title"></title>
+$(if refresh-timeout)
+<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+$(endif)
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="theme-color" content="#d0d2d6" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/bg.css">
+<link rel="stylesheet" href="css/vanzj.css">
+<link rel="icon" type="image/x-icon" href="img/logo.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script language="JavaScript">
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+	if (window.focus) popup.focus();
+    }
+    function openAdvert() {
+	popup = open('$(link-advert)', 'hotspot_advert', '');
+	setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+	if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+	window.close();
+	return false;
+    }
+
+</script>
+
+<style>
+        body {
+            margin: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: auto;
+            background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .wave {
+            background: rgb(255 255 255 / 25%);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes wave {
+            2% {
+                transform: translateX(1);
+            }
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(1);
+            }
+        }
+				        .notification {
+            display: none;
+            background-color: #ffdddd;
+            color: red;
+            padding: 15px;
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            z-index: 1000;
+            border: 1px solid red;
+            border-radius: 5px;
+        }
+
+        .hamburger-menu {
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 15px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .hamburger-menu .bar {
+            width: 100%;
+            height: 4px;
+            background-color: #fff;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+  .menu-items {
+            display: none;
+            position: fixed;
+            top: 50px;
+            right: 25px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .menu-items a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+		.menu-items h1 {
+			text-align: center;
+			margin-bottom: 20px;
+			font-size: 24px;
+			color: white; /* Set the title color to white */
+		}
+
+
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+.button-85 {
+  padding: 0.7em 7em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+#loadingScreen {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    z-index: 10000; /* High z-index to overlay other elements */
+    text-align: center;
+    color: white;
+}
+
+#loadingScreen .loading-icon {
+    font-size: 80px;
+    margin-top: 20%;
+    animation: spin 2s linear infinite; /* Simple spinning animation */
+}
+
+/* Media query for devices with width less than 600px */
+@media (max-width: 600px) {
+    #loadingScreen .loading-icon {
+        font-size: 50px; /* Reduce icon size for smaller screens */
+        margin-top: 40%; /* Adjust the margin for better positioning */
+    }
+
+    #loadingScreen p {
+        font-size: 16px; /* Adjust the text size */
+    }
+}
+
+/* Simple spinning animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.small-button {
+  background: rgba(62, 66, 66, 0.3);
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: "Exo";
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 30px;
+  width: 48%;
+}
+
+.small-button i {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.small-button:hover {
+  box-shadow: 0 0 15px #77f7f7;
+}
+
+/* Banner notification */
+.banner-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Notification content */
+.notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.notification-content p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    flex-grow: 1;  /* Allows the paragraph to grow and push the close button to the right */
+    padding-right: 15px; /* Ensures there's space between the text and the close button */
+}
+
+/* Close button */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    align-self: flex-start; /* Ensures button aligns with the top of the notification */
+}
+
+.close-btn:hover {
+    color: #ff4d4d;
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Popup styling */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px; /* Increased width */
+    height: auto;
+    background-color: white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+    z-index: 1000;
+    text-align: center;
+    border-radius: 15px; /* More pronounced rounded corners */
+    overflow: hidden; /* Prevent overflow */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+}
+
+/* Image styling */
+.popup img {
+    width: 100%; /* Set width to 100% of the container */
+    height: 220px; /* Adjusted fixed height */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+    border-top-left-radius: 15px; /* Rounded corners for the top */
+    border-top-right-radius: 15px; /* Rounded corners for the top */
+}
+
+/* Close button styling */
+.popup .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 24px; /* Larger font size for better visibility */
+    cursor: pointer;
+    color: #e67e22; /* Changed color to a bright orange */
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    border-radius: 50%; /* Round button */
+    width: 36px; /* Fixed width for consistency */
+    height: 36px; /* Fixed height for consistency */
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+.popup .close-btn:hover {
+    color: white; /* Change text color to white on hover */
+    background-color: #e67e22; /* Change background color on hover */
+}
+
+/* Product information styling */
+.product-info {
+    margin-top: 20px;
+    padding: 20px; /* Increased padding for better spacing */
+}
+
+.product-info p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555; /* Softer text color for better readability */
+}
+
+.product-info #ad-price {
+    font-weight: bold;
+    color: #e67e22;
+    font-size: 18px; /* Slightly larger font for emphasis */
+}
+
+/* Carousel controls */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 40px; /* Fixed width for better consistency */
+    height: 40px; /* Fixed height for buttons */
+    padding: 10px; /* Padding for better clickable area */
+    margin-top: -20px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px; /* Increased font size for visibility */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for contrast */
+    border: none;
+    border-radius: 50%;
+    user-select: none;
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effect */
+}
+
+.prev {
+    left: 15px; /* Adjusted position */
+}
+
+.next {
+    right: 15px; /* Adjusted position */
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker on hover */
+    transform: scale(1.1); /* Slight scale on hover */
+}
+
+/* Buy Now button styling */
+.buy-now-btn {
+    display: inline-block;
+    padding: 12px 24px; /* Increased padding for better click area */
+    background-color: #e67e22;
+    color: white;
+    text-decoration: none;
+    font-size: 18px; /* Slightly larger font size for emphasis */
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s, transform 0.2s; /* Added transform for scaling effect */
+}
+
+.buy-now-btn:hover {
+    background-color: #d35400;
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .popup {
+        width: 90%; /* Responsive width on smaller screens */
+    }
+    
+    .product-info {
+        padding: 15px; /* Reduced padding on smaller screens */
+    }
+    
+    .prev, .next {
+        padding: 8px; /* Reduced padding for buttons */
+        font-size: 16px; /* Smaller font size for buttons */
+    }
+    
+    .buy-now-btn {
+        font-size: 16px; /* Smaller font size for button */
+    }
+}
+.popup-footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #333;
+}
+
+.popup-footer a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.popup-footer a:hover {
+    text-decoration: underline;
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.proof-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.proof-button:hover {
+    background-color: #138496;
+}
+
+/* Banner Ad Styling */
+.banner-ad {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+}
+
+.banner-content h2 {
+    margin-bottom: 10px;
+}
+
+.banner-content p {
+    margin-bottom: 20px;
+}
+
+.banner-link {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.banner-link:hover {
+    background-color: #0056b3;
+}
+
+/* Proof Images Styling */
+.proof-image {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+@media only screen and (max-width: 480px) {
+    .banner-content {
+        padding: 15px;
+    }
+
+    .small-button, .proof-button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    .banner-link {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .close-btn {
+        font-size: 18px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .proof-image {
+        max-width: 200px;
+    }
+}
+    .price-image {
+        width: 100px; /* Set the desired width for the image */
+        height: auto; /* Ensure the height adjusts proportionally to maintain the landscape aspect ratio */
+        margin: 10px; /* Add some margin between the images */
+        border-radius: 8px; /* Optional: add rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow for a modern look */
+        transition: transform 0.3s ease; /* Add a hover effect */
+    }
+
+    /* Hover effect to enlarge the image slightly */
+    .price-image:hover {
+        transform: scale(1.05); /* Slightly increase the size on hover */
+    }
+
+    /* Adjust layout for different screen sizes */
+    @media (max-width: 768px) {
+        .price-image {
+            width: 80px; /* Smaller width on mobile devices */
+        }
+    }
+    </style>
+</head>
+<body $(if advert-pending == 'yes')	onLoad="openAdvert()" $(endif) >
+    <div id="loadingScreen">
+        <div class="loading-icon">
+            <i class="bi bi-tv"></i>
+        </div>
+        <p>Loading....</p>
+    </div>
+	
+<div id="popup" class="popup">
+    <span class="close-btn" onclick="closePopup()">×</span>
+
+    <!-- Carousel Container -->
+    <div class="carousel">
+        <a id="affiliate-link" href="" target="_blank">
+            <img id="ad-image" src="" alt="Affiliate Product">
+        </a>
+        <div class="product-info">
+            <p id="ad-description"></p>
+            <p id="ad-price"></p>
+            <a id="buy-now-btn" href="" target="_blank" class="buy-now-btn">Buy Now</a>
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="prev" onclick="prevAd()">&#10094;</button>
+        <button class="next" onclick="nextAd()">&#10095;</button>
+    </div>
+
+<div class="popup-footer">
+    <p>&copy; Powered by Dariel Ganzon</p>
+    <a href="#" id="privacy-link">Privacy Policy</a> |
+    <a href="#" id="terms-link">Terms of Service</a>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div id="privacy-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-privacy">&times;</span>
+        <h2>Privacy Policy</h2>
+        <p>
+            We value your privacy and are committed to protecting your personal data. 
+            This privacy policy explains what information we collect, how we use it, and 
+            what rights you have regarding your data. We collect data when you use our services, 
+            such as your IP address, browser type, and interaction with our site. 
+            We do not share your information with third parties without your consent.
+        </p>
+        <p>
+            If you have any questions or concerns about how your data is handled, 
+            please contact our support team at darielganzon2003@gmail.com.
+        </p>
+    </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="terms-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-terms">&times;</span>
+        <h2>Terms of Service</h2>
+        <p>
+            Welcome to our platform. By accessing or using our services, 
+            you agree to comply with and be bound by the following terms and conditions. 
+            You are responsible for ensuring that your use of the service complies with all applicable laws. 
+            You agree not to misuse our services, including not engaging in any illegal activities 
+            or attempting to disrupt our systems.
+        </p>
+        <p>
+            Our services are provided "as is," and we do not offer any warranties regarding their functionality 
+            or availability. For more details, please read the full Terms of Service document.
+        </p>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<div class="banner-notification" id="banner">
+  <div class="notification-content">
+    <p>
+      <!-- Embed the SVG notification icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8a6 6 0 1 0-12 0c0 4.5-3 5.5-3 7v1h18v-1c0-1.5-3-2.5-3-7zM9 20h6"></path>
+      </svg>
+<p><strong>New features added:</strong> Earn money by investing in EcoMamoni and receive daily income.</p>
+    </p>
+    <button class="close-btn" id="close-btn">&times;</button>
+  </div>
+</div>
+
+
+<div class="main">
+$(if login-by == 'trial')
+    <i style="visibility: hidden;">Trial User</i><br>
+$(elif login-by != 'mac')
+    <i id="user" style="visibility: hidden;">$(username)</i><br>
+$(endif)
+
+    
+<div class="container">
+    <class="statusFont2"><b class="blinking2">Connected</b>
+<form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+
+
+<table class="table2">
+    <br>
+    $(if login-by == 'trial')
+    <tr><td align="right" style="width: 42%;">User <i class="icon icon-user-circle-o">&#xe80f;</i> </td><td>Trial User</td></tr>
+    $(elif login-by != 'mac')
+    <tr><td align="right" style="width: 42%;">User <i class="icon icon-user-circle-o">&#xe80f;</i> </td><td>$(username)</td></tr>
+    $(endif)
+	<tr><td align="right" style="width: 42%;">IP Address <i class="icon icon-sitemap">&#xf0e8;</i> </td><td>$(ip)</td></tr>
+    <tr><td align="right">MAC Address <i class="icon icon-barcode">&#xe814;</i> </td><td>$(mac)</td></tr>
+    <tr><td align="right">Upload <i class="icon icon-upload">&#xf02f;</i> </td><td>$(bytes-in-nice)</td></tr>
+    <tr><td align="right">Download <i class="icon icon-download">&#xf02e;</i> </td><td>$(bytes-out-nice)</td></tr>
+	<tr><td align="right">Connected <i class="icon icon-exchange">&#xf0ec;</i> </td><td>$(uptime)</td></tr>
+$(if remain-bytes-total)
+    <tr><td align="right">Bytes Left <i class="icon icon-hourglass-2">&#xf252;</i> </td><td>$(remain-bytes-total-nice)</td></tr>
+$(endif)
+$(if session-time-left)
+    <tr><td align="right">Time Left <i class="icon icon-clock">&#xe807;</i> </td><td id="timeleft"></td></tr>
+
+$(endif)
+$(if blocked == 'yes')
+	<tr><td align="right">Status <i class="icon icon-check">&#xe807;</i> </td><td><div style="color: #FF8080">
+<a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td></tr>
+$(elif refresh-timeout)
+	<td align="right" onload="alertUser()">Refresh <i class="icon icon-arrows-cw">&#xe800;</i> </td><td>$(refresh-timeout)</td>
+$(endif)
+    <tr><td align="right">Expired <i class="icon icon-calendar">&#xe838;</i> </td><td style="padding-top:0px; padding-left:2px;"><iframe id="exp" frameborder="0" scrolling="no" src="about:blank"></iframe></td></tr>
+</table>
+$(if login-by-mac != 'yes')
+<div class="button-container">
+	<a href="https://klcis.cc/" class="small-button" role="button" onclick="showLoadingScreen('https://klcis.cc/')"><i class="bi bi-tv"></i> Watch TV</a>
+	<a href="https://radio.garden/" class="small-button" role="button" onclick="showLoadingScreen('https://radio.garden/')"><i class="bi bi-broadcast"></i> Listen Radio</a>
+    <!-- Button to Open Main Banner -->
+    <a href="javascript:void(0);" class="small-button" role="button" onclick="showBannerAd()">
+        <i class="bi bi-cash-coin"></i> Earn Money
+    </a>
+
+    <!-- Main Banner Ad (hidden by default) -->
+    <div id="bannerAd" class="banner-ad">
+        <div class="banner-content">
+            <span class="close-btn" onclick="closeBannerAd()">×</span>
+            <h2>Grow Your Wealth with Ecomamoni Investment!</h2>
+          <p>Start your journey to financial freedom by investing in Ecomamoni. With high returns and a trusted platform, you can watch your money grow faster. Invest now and secure your future. Check out the price list for investments with daily income.</p>
+			<img src="img/P1.png" alt="Proof of Withdrawal 3" class="price-image">
+			<img src="img/P2.png" alt="Proof of Withdrawal 3" class="price-image">
+			<img src="img/P3.png" alt="Proof of Withdrawal 3" class="price-image">
+			<img src="img/P4.png" alt="Proof of Withdrawal 3" class="price-image">
+			<img src="img/P5.png" alt="Proof of Withdrawal 3" class="price-image">
+			<img src="img/P6.png" alt="Proof of Withdrawal 3" class="price-image">
+            <a href="https://ecomamoni.com/join?i=ty2uYK" target="_blank" class="banner-link">Register Now and Start Earning!</a>
+            <!-- Button for Proof of Withdrawal -->
+            <a href="javascript:void(0);" class="proof-button" onclick="showProofBanner()">View Proof of Withdrawal</a>
+        </div>
+    </div>
+
+    <!-- Proof of Withdrawal Banner (hidden by default) -->
+    <div id="proofBanner" class="banner-ad">
+        <div class="banner-content">
+            <span class="close-btn" onclick="closeProofBanner()">×</span>
+            <h2>Proof of Withdrawals</h2>
+            <p>See real proof of withdrawals made by our investors.</p>
+            <!-- Proof Images -->
+            <img src="img/invest1.png" alt="Proof of Withdrawal 1" class="proof-image">
+            <img src="img/invest2.png" alt="Proof of Withdrawal 2" class="proof-image">
+            <img src="img/invest3.png" alt="Proof of Withdrawal 3" class="proof-image">
+			<img src="img/invest4.png" alt="Proof of Withdrawal 3" class="proof-image">
+			<img src="img/invest5.png" alt="Proof of Withdrawal 3" class="proof-image">
+        </div>
+    </div>
+
+</div>
+
+				
+					<button class="button" type="submit"><i class="icon icon-logout">&#xe80c;</i> Pause Time</button>
+$(endif)
+</form>
+</div>
+
+<br>
+
+        <i style="color: white;">Powered by</i> <a href="https://www.facebook.com/leiradnoznag" style="color: #c40c06;"><b>DARIEL GANZON</b><i class="icon icon-youtube-3">&#xf167;</i></a>            
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+<script type="text/javascript">
+    document.getElementById('title').innerHTML = window.location.hostname + " > status";
+    var usr = document.getElementById('user').innerHTML
+    var url = "http://192.168.5.1/status/status.php?name=";
+    var SessionName = "vard"
+    var getvalid = url+usr+"&session="+SessionName
+    document.getElementById('exp').src = getvalid;  
+	
+	            function showNotification(message) {
+                var notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerText = message;
+                document.body.appendChild(notification);
+                notification.style.display = 'block';
+                setTimeout(function () {
+                    notification.style.display = 'none';
+                }, 5000);
+            }
+
+            function toggleMenu() {
+                var menu = document.querySelector('.menu-items');
+                var hamburger = document.querySelector('.hamburger-menu');
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                hamburger.classList.toggle('active');
+            }
+    function checkAdultPermission(url) {
+        Swal.fire({
+            title: 'Adult Content Warning',
+            text: 'This content is only for adults. The WiFi hotspot owner is not responsible for adult content you access. You are solely responsible for viewing such material.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, I am 18+',
+            cancelButtonText: 'No, I am under 18'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                askForConfirmation(url);
+            } else {
+                showNotification("You must be 18 or older to view this content.");
+            }
+        });
+    }
+
+    function askForConfirmation(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Are you sure you want to proceed?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            } else {
+                showNotification("You must be 18 or older to view this content.");
+            }
+        });
+    }
+
+			function showNotification(message) {
+				Swal.fire({
+					title: 'Notice',
+					text: message,
+					icon: 'info',
+					confirmButtonText: 'OK'
+				});
+			}
+	function showLoadingScreen(url) {
+            document.getElementById('loadingScreen').style.display = 'block';
+            setTimeout(function() {
+                window.location.href = url;
+            }, 2000); // 2-second delay for the loading screen
+        }
+		document.addEventListener('contextmenu', event => event.preventDefault());
+				  const closeBtn = document.getElementById('close-btn');
+        const banner = document.getElementById('banner');
+
+        closeBtn.addEventListener('click', () => {
+            banner.style.display = 'none';
+        });
+		
+// Array of image paths, affiliate links, descriptions, and prices
+const ads = [
+    { 
+        img: 'img/shop1.png', 
+        link: 'https://tinyurl.com/bzdmrrfc', 
+        description: 'Fashion Unisex Samba Sneakers Low Cut Skateboard Shoes For Men Shoes and Women Rubber shoes', 
+		 price: 'Price: 299 - 369'
+    },
+    { 
+        img: 'img/shop2.png', 
+        link: 'https://tinyurl.com/y9njrzuc', 
+        description: 'BUY 1 TAKE 1 Cargo Pants/Taslan Fabric Jogger Pants with 2 pocket Free size', 
+        price: 'Price: 85 - 179'
+    },
+    { 
+        img: 'img/shop3.png', 
+        link: 'https://s.shopee.ph/8Ur2oHodD8', 
+        description: 'Vaseline Lip Therapy Rosy Lips Mini 7g', 
+        price: 'Price: 8 - 9'
+    },
+	    { 
+        img: 'img/shop4.png', 
+        link: 'https://s.shopee.ph/AKIgzrtej2', 
+        description: 'Electric Eyebrow Trimmer Painless Remover Brows Razor Eyebrow Shaver Mini Hair Removal Device', 
+        price: 'Price: 112 - 149'
+    },
+	    { 
+        img: 'img/shop5.png', 
+        link: 'https://s.shopee.ph/6piopwCT99', 
+        description: 'Straight hair comb Wireless 2 in 1 Hair Straightener and Curler USB Charging Portable Hair Comb', 
+        price: 'Price: 129 - 143'
+    },
+	    { 
+        img: 'img/shop6.png', 
+        link: 'https://s.shopee.ph/8KXccoYjGZ', 
+        description: 'Sweet Night Perfume Long Lasting Fragrance Classic Series 236ml Vanilla Fragrance Mist Perfume for women for men Unisex', 
+        price: 'Price: 41'
+    },
+	    { 
+        img: 'img/shop7.png', 
+        link: 'https://s.shopee.ph/6AT82yCo2S', 
+        description: 'Fashion Boutique Women Pure cotton letter Seamless Panties One-piece underwear Sexy', 
+        price: 'Price: 22 - 65'
+    },
+	    { 
+        img: 'img/shop8.png', 
+        link: 'https://s.shopee.ph/5VDRFpMOme', 
+        description: 'Plus Size Dolphin Shorts Cotton Spandex Pambahay Candy Short 2xl 3xl 5xl', 
+        price: 'Price: 37 - 59'
+    },
+	    { 
+        img: 'img/shop9.png', 
+        link: 'https://s.shopee.ph/2AwzHo5ekg', 
+        description: 'Nursing bra maternity breastfeeding mom non wire bras front clasped with form wireless push up women', 
+        price: 'Price: 78'
+    },
+	    { 
+        img: 'img/shop10.png', 
+        link: 'https://s.shopee.ph/AUc7DAuvPF', 
+        description: 'COD??6-Pieces Flower Colors Dolphin Sexy Shorts For Women Ladies', 
+        price: 'Price: 139'
+    },
+		    { 
+        img: 'img/shop11.png', 
+        link: 'https://s.shopee.ph/8AECp3f3MT', 
+        description: 'PHILIPS BUY 1 TAKE 1 Solar Light Outdoor LED Waterproof Solar Flood Street Lamp With Solar Panel', 
+        price: 'Price: 449 - 2,245'
+    },
+			    { 
+        img: 'img/shop12.png', 
+        link: 'https://s.shopee.ph/3VSNGcfmIL', 
+        description: 'AVIEROO 2024 New Arrival 3in1 Korean Terno Prints Shortsleeves Shorts/Pajama Terno Sleepwear Set', 
+        price: 'Price: 199 - 269'
+    },
+				    { 
+        img: 'img/shop13.png', 
+        link: 'https://s.shopee.ph/1VhItMTsq3', 
+        description: 'Vita Sandals For Women With Heels Elegant Sandals Block Heels High Heels For Women 7CM (add 1 size)', 
+        price: 'Price: 108'
+    },
+					    { 
+        img: 'img/shop14.png', 
+        link: 'https://s.shopee.ph/8pTtcldJxz', 
+        description: 'Dear Face Beauty Milk Collagen Drink Strawberry(Melon Flavor and Strawberry Flavor)', 
+        price: 'Price: 108'
+    },
+						    { 
+        img: 'img/shop15.png', 
+        link: 'https://s.shopee.ph/8Ur3EOLT9I', 
+        description: 'Mione 2.09 inch Smart Watch T800 Ultra Big Screen Watch 8 Series 9 Smartwatch T900 Ultra Bluetooth Call Wireless Charge Fitness Heart Rate', 
+        price: 'Price: 590 - 680'
+    },
+	
+							    { 
+        img: 'img/shop16.png', 
+        link: 'https://s.shopee.ph/6KmYg9ToUE', 
+        description: 'Women shoes, flat shoes, casual work shoes, mesh shoes, soft soles, non-slip', 
+        price: 'Price: 88'
+    },
+];
+
+let currentIndex = 0; // Start with the first ad
+
+// Function to update the pop-up content with the current ad
+function updatePopup() {
+    const popup = document.getElementById('popup');
+    const adImage = document.getElementById('ad-image');
+    const affiliateLink = document.getElementById('affiliate-link');
+    const adDescription = document.getElementById('ad-description');
+    const adPrice = document.getElementById('ad-price');
+    const buyNowBtn = document.getElementById('buy-now-btn');
+
+    const currentAd = ads[currentIndex];
+
+    // Update the image, link, description, price, and Buy Now button
+    adImage.src = currentAd.img;
+    affiliateLink.href = currentAd.link;  // Affiliate link for image
+    adDescription.textContent = currentAd.description;
+    adPrice.textContent = currentAd.price;
+    buyNowBtn.href = currentAd.link;      // Same link for "Buy Now" button
+
+    popup.style.display = 'block'; // Show the popup
+}
+
+// Function to show the next ad
+function nextAd() {
+    currentIndex = (currentIndex + 1) % ads.length; // Go to the next ad, loop back if necessary
+    updatePopup();
+}
+
+// Function to show the previous ad
+function prevAd() {
+    currentIndex = (currentIndex - 1 + ads.length) % ads.length; // Go to the previous ad, loop back if necessary
+    updatePopup();
+}
+
+// Close the pop-up
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none'; // Hide the popup
+    // Show another random popup after the current one is closed
+    setTimeout(updatePopup, 5000); // Show new popup after 5 seconds
+}
+
+// Show the first popup when the page loads
+window.onload = function() {
+    setTimeout(updatePopup, 2000); // Show popup after 2 seconds
+};
+
+// Function to show the main banner ad
+function showBannerAd() {
+    document.getElementById('bannerAd').style.display = 'block';
+}
+
+// Function to close the main banner ad
+function closeBannerAd() {
+    document.getElementById('bannerAd').style.display = 'none';
+}
+
+// Function to show the proof of withdrawal banner
+function showProofBanner() {
+    document.getElementById('proofBanner').style.display = 'block';
+}
+
+// Function to close the proof of withdrawal banner
+function closeProofBanner() {
+    document.getElementById('proofBanner').style.display = 'none';
+}
+
+
+</script>
+
+<script>
+    var seconds = '$(session-time-left-secs)';
+    var countDownDate = new Date(Date.now()+ seconds*1000).getTime();
+    var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+    document.getElementById("timeleft").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+    
+    if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timeleft").innerHTML = "EXPIRED";
+    }
+    }, 1000);
+</script>
+<script>
+document.getElementById('privacy-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('privacy-modal').style.display = 'block';
+});
+
+document.getElementById('terms-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('terms-modal').style.display = 'block';
+});
+
+// Close buttons
+document.getElementById('close-privacy').addEventListener('click', function() {
+    document.getElementById('privacy-modal').style.display = 'none';
+});
+
+document.getElementById('close-terms').addEventListener('click', function() {
+    document.getElementById('terms-modal').style.display = 'none';
+});
+
+// Close modal when clicking outside of modal content
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+};
+</script>
+</body>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/66bbe566146b7af4a43a07c9/1i56vg6mi';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<script>
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && (e.key === 'i' || e.key === 'I')) {
+        e.preventDefault();
+    }
+});
+</script>
+</html>
